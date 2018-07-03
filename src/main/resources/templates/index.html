@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Pogodziak</title>
+    <link rel="stylesheet" href="stylesheet.css" type="text/css" />
+</head>
+<body>
+<center>
+    <h2>Pogodziak</h2>
+    <h5>Sprawdź aktualną pogodę gdziekolwiek na świecie jesteś</h5>
+    <br><br>
+
+    <div>
+        <a href="/">Aktualna pogoda</a>
+        <a href="/fiveDayWeather">Pogoda na 5 dni</a>
+    </div>
+    <br>
+
+    <div style="text-align: center;">
+        <form method="post" action="/">
+            <input type="text" placeholder="Wpisz miasto" name="city">
+            <input id="sumbit" type="submit" value="Pokaż pogodę">
+        </form>
+    </div>
+
+    <br><br>
+
+    <div th:if="${city} != null">
+        <table id="currentWeatherTable">
+            <tr>
+                <td colspan="2" style="background-color: antiquewhite"><span th:text="${city}"></span></td>
+            </tr>
+            <tr>
+                <td id="descriptionField">Kraj</td>
+                <td><span th:text="${country}"></span></td>
+            </tr>
+            <tr>
+                <td id="descriptionField">Temperatura w cieniu</td>
+                <td><span th:text="${temperature}"></span></td>
+            </tr>
+            <tr>
+                <td id="descriptionField">Ciśnienie powietrza</td>
+                <td><span th:text="${pressure}"></span></td>
+            </tr>
+            <tr>
+                <td id="descriptionField">Wilgotność powietrza</td>
+                <td><span th:text="${humidity}"></span></td>
+            </tr>
+            <tr>
+                <td id="descriptionField">Zachmurzenie</td>
+                <td><span th:text="${cloudiness}"></span></td>
+            </tr>
+            <tr>
+                <td id="descriptionField">Wschód słońca</td>
+                <td><span th:text="${sunrise}"></span></td>
+            </tr>
+            <tr>
+                <td id="descriptionField">Zachód słońca</td>
+                <td><span th:text="${sunset}"></span></td>
+            </tr>
+        </table>
+        <br>
+        Uwaga! Podany czas wschodu i zachodu słońca zawsze jest zgodny ze strefą czasową Polski (UTC + 01:00)
+    </div>
+</center>
+</body>
+</html>

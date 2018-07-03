@@ -1,0 +1,105 @@
+body
+{
+    align-content: center;
+}
+
+#fiveDayWeatherTable
+{
+    border: 2px solid black;
+    border-collapse: collapse;
+    padding: 5px;
+    width: 30%;
+}
+
+#currentWeatherTable
+{
+    border: 2px solid black;
+    border-collapse: collapse;
+    padding: 5px;
+    width: 25%;
+}
+td
+{
+    border: 2px solid black;
+    border-collapse: collapse;
+    padding: 5px;
+    text-align: center;
+}
+
+tr:hover
+{
+    background-color: lightsteelblue
+}
+
+#mainRow
+{
+    font-weight: bold;
+    background-color: darkgrey;
+}
+
+#descriptionField
+{
+    font-weight: bold;
+    background-color: lightgrey;
+}
+
+/* Link nieodwiedzony */
+a:link
+{
+    background-color: darkgrey;
+    text-decoration: none; 			/* Wyłącza dekoracje tekstu (w tym przypadku podkreślenie linku) */
+    color: black;					/* kolor tekstu */
+    border: 1px black solid; 		/* Ramka tekstu szerokość/kolor/styl */
+    padding: 2px 4px; 				/* Odstępy ramki od tekstu */
+    -webkit-border-radius: 10px; 	/* Zaokrąglenie ramki (średnica zaokrąglenia) */
+    -moz-border-radius: 10px;		/* Zaokrąglenie ramki (średnica zaokrąglenia) - Mozilla */
+    border-radius: 10px;			/* Zaokrąglenie ramki (średnica zaokrąglenia) */
+}
+
+/* Link odwiedzony */
+a:visited
+{
+    background-color: darkgrey;
+    text-decoration: none;
+    color: black;
+    border: 1px black solid;
+    padding: 2px 4px;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    border-radius: 10px;
+}
+
+/* Link po najechaniu myszką */
+a:hover
+{
+    background-color: aliceblue;
+    text-decoration: none;
+    color: black;
+    border: 1px black solid;
+    padding: 2px 4px;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    border-radius: 10px;
+}
+
+#sumbit
+{
+    background-color: #00264d;
+    color: white;
+    border: 1px black solid;
+    padding: 2px 4px;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    border-radius: 10px;
+}
+
+#sumbit:hover
+{
+    background-color: white;
+    color: #00264d;
+    border: 1px black solid;
+    padding: 2px 4px;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    border-radius: 10px;
+}

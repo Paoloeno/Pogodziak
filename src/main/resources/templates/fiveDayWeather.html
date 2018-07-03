@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Pogodziak</title>
+    <link rel="stylesheet" href="stylesheet.css" type="text/css" />
+</head>
+<body>
+<center>
+    <h2>Pogodziak</h2>
+    <h5>Sprawdź pogodę na kolejne 5 dni</h5>
+    <br><br>
+
+    <div>
+        <a href="/">Aktualna pogoda</a>
+        <a href="/fiveDayWeather">Pogoda na 5 dni</a>
+    </div>
+    <br>
+
+    <div style="text-align: center;">
+        <form method="post" action="/fiveDayWeather">
+            <input type="text" placeholder="Wpisz miasto" name="city">
+            <input id="sumbit" type="submit" value="Pokaż pogodę">
+        </form>
+    </div>
+
+    <br><br>
+
+    <div th:if="${city} != null">
+        <h3 th:text="${city}"></h3>
+        <table id="fiveDayWeatherTable">
+            <tr id="mainRow">
+                <th>Data</th>
+                <th>Godzina</th>
+                <th>Temperatura</th>
+            </tr>
+            <tr th:object="${record0}">
+                <td><span th:text="*{date}"></span></td>
+                <td><span th:text="*{hour}"></span></td>
+                <td style="text-align: center"><span th:text="*{fiveDayWeatherMainStats.stringTemperature}"></span></td>
+            </tr>
+            <tr th:object="${record1}">
+                <td><span th:text="*{date}"></span></td>
+                <td><span th:text="*{hour}"></span></td>
+                <td style="text-align: center"><span th:text="*{fiveDayWeatherMainStats.stringTemperature}"></span></td>
+            </tr>
+            <tr th:object="${record2}">
+                <td><span th:text="*{date}"></span></td>
+                <td><span th:text="*{hour}"></span></td>
+                <td style="text-align: center"><span th:text="*{fiveDayWeatherMainStats.stringTemperature}"></span></td>
+            </tr>
+            <tr th:object="${record3}">
+                <td><span th:text="*{date}"></span></td>
+                <td><span th:text="*{hour}"></span></td>
+                <td style="text-align: center"><span th:text="*{fiveDayWeatherMainStats.stringTemperature}"></span></td>
+            </tr>
+            <tr th:object="${record4}">
+                <td><span th:text="*{date}"></span></td>
+                <td><span th:text="*{hour}"></span></td>
+                <td style="text-align: center"><span th:text="*{fiveDayWeatherMainStats.stringTemperature}"></span></td>
+            </tr>
+            <tr th:object="${record5}">
+                <td><span th:text="*{date}"></span></td>
+                <td><span th:text="*{hour}"></span></td>
+                <td style="text-align: center"><span th:text="*{fiveDayWeatherMainStats.stringTemperature}"></span></td>
+            </tr>
+            <tr th:object="${record6}">
+                <td><span th:text="*{date}"></span></td>
+                <td><span th:text="*{hour}"></span></td>
+                <td style="text-align: center"><span th:text="*{fiveDayWeatherMainStats.stringTemperature}"></span></td>
+            </tr>
+            <tr th:object="${record7}">
+                <td><span th:text="*{date}"></span></td>
+                <td><span th:text="*{hour}"></span></td>
+                <td style="text-align: center"><span th:text="*{fiveDayWeatherMainStats.stringTemperature}"></span></td>
+            </tr>
+            <tr th:object="${record8}">
+                <td><span th:text="*{date}"></span></td>
+                <td><span th:text="*{hour}"></span></td>
+                <td style="text-align: center"><span th:text="*{fiveDayWeatherMainStats.stringTemperature}"></span></td>
+            </tr>
+            <tr th:object="${record9}">
+                <td><span th:text="*{date}"></span></td>
+                <td><span th:text="*{hour}"></span></td>
+                <td style="text-align: center"><span th:text="*{fiveDayWeatherMainStats.stringTemperature}"></span></td>
+            </tr>
+            <tr th:object="${record10}">
+                <td><span th:text="*{date}"></span></td>
+                <td><span th:text="*{hour}"></span></td>
+                <td style="text-align: center"><span th:text="*{fiveDayWeatherMainStats.stringTemperature}"></span></td>
+            </tr>
+            <tr th:object="${record11}">
+                <td><span th:text="*{date}"></span></td>
+                <td><span th:text="*{hour}"></span></td>
+                <td style="text-align: center"><span th:text="*{fiveDayWeatherMainStats.stringTemperature}"></span></td>
+            </tr>
+            <tr th:object="${record12}">
+                <td><span th:text="*{date}"></span></td>
+                <td><span th:text="*{hour}"></span></td>
+                <td style="text-align: center"><span th:text="*{fiveDayWeatherMainStats.stringTemperature}"></span></td>
+            </tr>
+            <tr th:object="${record13}">
+                <td><span th:text="*{date}"></span></td>
+                <td><span th:text="*{hour}"></span></td>
+                <td style="text-align: center"><span th:text="*{fiveDayWeatherMainStats.stringTemperature}"></span></td>
+            </tr>
+            <tr th:object="${record14}">
+                <td><span th:text="*{date}"></span></td>
+                <td><span th:text="*{hour}"></span></td>
+                <td style="text-align: center"><span th:text="*{fiveDayWeatherMainStats.stringTemperature}"></span></td>
+            </tr>
+            <tr th:object="${record15}">
+                <td><span th:text="*{date}"></span></td>
+                <td><span th:text="*{hour}"></span></td>
+                <td style="text-align: center"><span th:text="*{fiveDayWeatherMainStats.stringTemperature}"></span></td>
+            </tr>
+            <tr th:object="${record16}">
+                <td><span th:text="*{date}"></span></td>
+                <td><span th:text="*{hour}"></span></td>
+                <td style="text-align: center"><span th:text="*{fiveDayWeatherMainStats.stringTemperature}"></span></td>
+            </tr>
+            <tr th:object="${record17}">
+                <td><span th:text="*{date}"></span></td>
+                <td><span th:text="*{hour}"></span></td>
+                <td style="text-align: center"><span th:text="*{fiveDayWeatherMainStats.stringTemperature}"></span></td>
+            </tr>
+            <tr th:object="${record18}">
+                <td><span th:text="*{date}"></span></td>
+                <td><span th:text="*{hour}"></span></td>
+                <td style="text-align: center"><span th:text="*{fiveDayWeatherMainStats.stringTemperature}"></span></td>
+            </tr>
+            <tr th:object="${record19}">
+                <td><span th:text="*{date}"></span></td>
+                <td><span th:text="*{hour}"></span></td>
+                <td style="text-align: center"><span th:text="*{fiveDayWeatherMainStats.stringTemperature}"></span></td>
+            </tr>
+            <tr th:object="${record20}">
+                <td><span th:text="*{date}"></span></td>
+                <td><span th:text="*{hour}"></span></td>
+                <td style="text-align: center"><span th:text="*{fiveDayWeatherMainStats.stringTemperature}"></span></td>
+            </tr>
+            <tr th:object="${record21}">
+                <td><span th:text="*{date}"></span></td>
+                <td><span th:text="*{hour}"></span></td>
+                <td style="text-align: center"><span th:text="*{fiveDayWeatherMainStats.stringTemperature}"></span></td>
+            </tr>
+            <tr th:object="${record22}">
+                <td><span th:text="*{date}"></span></td>
+                <td><span th:text="*{hour}"></span></td>
+                <td style="text-align: center"><span th:text="*{fiveDayWeatherMainStats.stringTemperature}"></span></td>
+            </tr>
+            <tr th:object="${record23}">
+                <td><span th:text="*{date}"></span></td>
+                <td><span th:text="*{hour}"></span></td>
+                <td style="text-align: center"><span th:text="*{fiveDayWeatherMainStats.stringTemperature}"></span></td>
+            </tr>
+            <tr th:object="${record24}">
+                <td><span th:text="*{date}"></span></td>
+                <td><span th:text="*{hour}"></span></td>
+                <td style="text-align: center"><span th:text="*{fiveDayWeatherMainStats.stringTemperature}"></span></td>
+            </tr>
+            <tr th:object="${record25}">
+                <td><span th:text="*{date}"></span></td>
+                <td><span th:text="*{hour}"></span></td>
+                <td style="text-align: center"><span th:text="*{fiveDayWeatherMainStats.stringTemperature}"></span></td>
+            </tr>
+            <tr th:object="${record26}">
+                <td><span th:text="*{date}"></span></td>
+                <td><span th:text="*{hour}"></span></td>
+                <td style="text-align: center"><span th:text="*{fiveDayWeatherMainStats.stringTemperature}"></span></td>
+            </tr>
+            <tr th:object="${record27}">
+                <td><span th:text="*{date}"></span></td>
+                <td><span th:text="*{hour}"></span></td>
+                <td style="text-align: center"><span th:text="*{fiveDayWeatherMainStats.stringTemperature}"></span></td>
+            </tr>
+            <tr th:object="${record28}">
+                <td><span th:text="*{date}"></span></td>
+                <td><span th:text="*{hour}"></span></td>
+                <td style="text-align: center"><span th:text="*{fiveDayWeatherMainStats.stringTemperature}"></span></td>
+            </tr>
+            <tr th:object="${record29}">
+                <td><span th:text="*{date}"></span></td>
+                <td><span th:text="*{hour}"></span></td>
+                <td style="text-align: center"><span th:text="*{fiveDayWeatherMainStats.stringTemperature}"></span></td>
+            </tr>
+            <tr th:object="${record30}">
+                <td><span th:text="*{date}"></span></td>
+                <td><span th:text="*{hour}"></span></td>
+                <td style="text-align: center"><span th:text="*{fiveDayWeatherMainStats.stringTemperature}"></span></td>
+            </tr>
+            <tr th:object="${record31}">
+                <td><span th:text="*{date}"></span></td>
+                <td><span th:text="*{hour}"></span></td>
+                <td style="text-align: center"><span th:text="*{fiveDayWeatherMainStats.stringTemperature}"></span></td>
+            </tr>
+            <tr th:object="${record32}">
+                <td><span th:text="*{date}"></span></td>
+                <td><span th:text="*{hour}"></span></td>
+                <td style="text-align: center"><span th:text="*{fiveDayWeatherMainStats.stringTemperature}"></span></td>
+            </tr>
+            <tr th:object="${record33}">
+                <td><span th:text="*{date}"></span></td>
+                <td><span th:text="*{hour}"></span></td>
+                <td style="text-align: center"><span th:text="*{fiveDayWeatherMainStats.stringTemperature}"></span></td>
+            </tr>
+            <tr th:object="${record34}">
+                <td><span th:text="*{date}"></span></td>
+                <td><span th:text="*{hour}"></span></td>
+                <td style="text-align: center"><span th:text="*{fiveDayWeatherMainStats.stringTemperature}"></span></td>
+            </tr>
+            <tr th:object="${record35}">
+                <td><span th:text="*{date}"></span></td>
+                <td><span th:text="*{hour}"></span></td>
+                <td style="text-align: center"><span th:text="*{fiveDayWeatherMainStats.stringTemperature}"></span></td>
+            </tr>
+            <tr th:object="${record36}">
+                <td><span th:text="*{date}"></span></td>
+                <td><span th:text="*{hour}"></span></td>
+                <td style="text-align: center"><span th:text="*{fiveDayWeatherMainStats.stringTemperature}"></span></td>
+            </tr>
+            <tr th:object="${record37}">
+                <td><span th:text="*{date}"></span></td>
+                <td><span th:text="*{hour}"></span></td>
+                <td style="text-align: center"><span th:text="*{fiveDayWeatherMainStats.stringTemperature}"></span></td>
+            </tr>
+            <tr th:object="${record38}">
+                <td><span th:text="*{date}"></span></td>
+                <td><span th:text="*{hour}"></span></td>
+                <td style="text-align: center"><span th:text="*{fiveDayWeatherMainStats.stringTemperature}"></span></td>
+            </tr>
+            <tr th:object="${record39}">
+                <td><span th:text="*{date}"></span></td>
+                <td><span th:text="*{hour}"></span></td>
+                <td style="text-align: center"><span th:text="*{fiveDayWeatherMainStats.stringTemperature}"></span></td>
+            </tr>
+        </table>
+    </div>
+</center>
+</body>
+</html>
