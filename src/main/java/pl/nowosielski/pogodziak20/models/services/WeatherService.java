@@ -1,11 +1,23 @@
 package pl.nowosielski.pogodziak20.models.services;
 
+import com.neovisionaries.i18n.CountryCode;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
+import pl.nowosielski.pogodziak20.models.weather.countries.Country;
 import pl.nowosielski.pogodziak20.models.weather.current.WeatherModel;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Service
 public class WeatherService {
@@ -27,7 +39,9 @@ public class WeatherService {
         return weatherModel.getCityName();
     }
 
-    public String countryFormat(WeatherModel weatherModel){
+    public String countryFormat(WeatherModel weatherModel) {
+
+        translateCountryToPolish(weatherModel);
         return weatherModel.getSunStats().getCountry();
     }
 
@@ -53,14 +67,7 @@ public class WeatherService {
         int hour = sunrise.getHours();
         int minutes = sunrise.getMinutes();
 
-        if(hour < 10 && minutes<10)
-            return "0"+hour+":"+"0"+minutes;
-        else if(hour >= 10 && minutes<10)
-            return hour+":"+"0"+minutes;
-        else if(hour < 10 && minutes>=10)
-            return "0"+hour+":"+minutes;
-        else
-            return hour+":"+minutes;
+        return timeFormat(hour, minutes);
     }
 
     public String sunsetFormat(WeatherModel weatherModel){
@@ -69,13 +76,45 @@ public class WeatherService {
         int hour = sunset.getHours();
         int minutes = sunset.getMinutes();
 
-        if(hour < 10 && minutes<10)
-            return "0"+hour+":"+"0"+minutes;
-        else if(hour >= 10 && minutes<10)
-            return hour+":"+"0"+minutes;
-        else if(hour < 10 && minutes>=10)
-            return "0"+hour+":"+minutes;
-        else
-            return hour+":"+minutes;
+        return timeFormat(hour, minutes);
     }
+
+    public String timeFormat(int hours, int minutes){
+        if(hours < 10 && minutes<10)
+            return "0"+hours+":"+"0"+minutes;
+        else if(hours >= 10 && minutes<10)
+            return hours+":"+"0"+minutes;
+        else if(hours < 10 && minutes>=10)
+            return "0"+hours+":"+minutes;
+        else
+            return hours+":"+minutes;
+    }
+
+    public void translateCountryToPolish(WeatherModel weatherModel){
+        CountryCode countryCode = CountryCode.getByCode(weatherModel.getSunStats().getCountry());
+        String code = countryCode.getAlpha2();
+
+        JSONParser parser = new JSONParser();
+        JSONArray countryList = null;
+
+        try {
+            Object object = parser.parse(new FileReader("src/main/resources/static/PolishCountriesByISO3166.json"));
+            countryList = (JSONArray) object;
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        for (Object country: countryList) {
+
+            JSONObject tmpCountry = (JSONObject)country;
+            String tmpCode = (String)tmpCountry.get("code");
+
+            if(tmpCode.equals(code)){
+                weatherModel.getSunStats().setCountry((String)tmpCountry.get("name_pl"));
+            }
+        }
+    }
+
 }
