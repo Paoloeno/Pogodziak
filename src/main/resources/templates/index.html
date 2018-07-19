@@ -23,8 +23,8 @@
             <input id="sumbit" type="submit" value="Pokaż pogodę">
         </form>
     </div>
-
     <br><br>
+    <span th:if="@{errorMessage} != null" th:text="${errorMessage}"></span>
 
     <div th:if="${city} != null">
         <table id="currentWeatherTable">

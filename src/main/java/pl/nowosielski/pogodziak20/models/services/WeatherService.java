@@ -7,6 +7,7 @@ import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
 import pl.nowosielski.pogodziak20.models.weather.countries.Country;
 import pl.nowosielski.pogodziak20.models.weather.current.WeatherModel;
@@ -24,15 +25,20 @@ public class WeatherService {
 
     @Value("${openweathermap.api_key}")
     private String apiKey;
-
     private RestTemplate restTemplate;
-
     public WeatherService(){
         restTemplate = new RestTemplate();
     }
 
     public WeatherModel makeCall(String city) {
-        return restTemplate.getForObject("http://api.openweathermap.org/data/2.5/weather?q="+city+"&appid="+apiKey, WeatherModel.class);
+        String call = "http://api.openweathermap.org/data/2.5/weather?q="+city+"&appid="+apiKey;
+
+        try {
+            return restTemplate.getForObject(call, WeatherModel.class);
+        }catch (HttpClientErrorException e){
+            WeatherModel model = new WeatherModel();
+            return model;
+        }
     }
 
     public String cityFormat(WeatherModel weatherModel) {
@@ -40,7 +46,6 @@ public class WeatherService {
     }
 
     public String countryFormat(WeatherModel weatherModel) {
-
         translateCountryToPolish(weatherModel);
         return weatherModel.getSunStats().getCountry();
     }
@@ -71,7 +76,6 @@ public class WeatherService {
     }
 
     public String sunsetFormat(WeatherModel weatherModel){
-
         Date sunset = new Date(weatherModel.getSunStats().getSunsetInSeconds()*1000);
         int hour = sunset.getHours();
         int minutes = sunset.getMinutes();
@@ -96,25 +100,18 @@ public class WeatherService {
 
         JSONParser parser = new JSONParser();
         JSONArray countryList = null;
-
         try {
-            Object object = parser.parse(new FileReader("src/main/resources/static/PolishCountriesByISO3166.json"));
+            Object object = parser.parse(Country.countriesJson);
             countryList = (JSONArray) object;
-        } catch (IOException e) {
-            e.printStackTrace();
         } catch (ParseException e) {
             e.printStackTrace();
         }
-
         for (Object country: countryList) {
-
             JSONObject tmpCountry = (JSONObject)country;
             String tmpCode = (String)tmpCountry.get("code");
-
             if(tmpCode.equals(code)){
                 weatherModel.getSunStats().setCountry((String)tmpCountry.get("name_pl"));
             }
         }
     }
-
 }

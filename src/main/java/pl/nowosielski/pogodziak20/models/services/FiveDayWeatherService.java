@@ -7,6 +7,7 @@ import org.json.simple.parser.ParseException;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
+import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
 import pl.nowosielski.pogodziak20.models.weather.fivedays.FiveDayWeatherMainStats;
 import pl.nowosielski.pogodziak20.models.weather.fivedays.FiveDayWeatherModel;
@@ -20,9 +21,7 @@ public class FiveDayWeatherService {
 
     @Value("${openweathermap.api_key}")
     private String apiKey;
-
     private RestTemplate restTemplate;
-
     public FiveDayWeatherService(){
         restTemplate = new RestTemplate();
     }
@@ -31,8 +30,14 @@ public class FiveDayWeatherService {
 
         List<JSONObject> listOfweathers = new ArrayList<>();
         JSONParser parser = new JSONParser();
-        String json = restTemplate.getForObject(
-                "http://api.openweathermap.org/data/2.5/forecast?q="+city+"&appid="+apiKey, String.class);
+        String json;
+
+        try {
+            json = restTemplate.getForObject(
+                    "http://api.openweathermap.org/data/2.5/forecast?q=" + city + "&appid=" + apiKey, String.class);
+        }catch(HttpClientErrorException e){
+            return listOfweathers;
+        }
 
         try {
             Object object = parser.parse(json);

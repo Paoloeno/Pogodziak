@@ -30,15 +30,18 @@ public class MainController {
 
         WeatherModel weatherInfo = weatherService.makeCall(city);
 
-        model.addAttribute("city", weatherService.cityFormat(weatherInfo));
-        model.addAttribute("country", weatherService.countryFormat(weatherInfo));
-        model.addAttribute("temperature", weatherService.temperatureFormat(weatherInfo));
-        model.addAttribute("pressure", weatherService.pressureFormat(weatherInfo));
-        model.addAttribute("humidity", weatherService.humidityFormat(weatherInfo));
-        model.addAttribute("cloudiness", weatherService.cloudinessFormat(weatherInfo));
-        model.addAttribute("sunrise", weatherService.sunriseFormat(weatherInfo));
-        model.addAttribute("sunset", weatherService.sunsetFormat(weatherInfo));
-
+        if(weatherInfo.getCityName() != null) {
+            model.addAttribute("city", weatherService.cityFormat(weatherInfo));
+            model.addAttribute("country", weatherService.countryFormat(weatherInfo));
+            model.addAttribute("temperature", weatherService.temperatureFormat(weatherInfo));
+            model.addAttribute("pressure", weatherService.pressureFormat(weatherInfo));
+            model.addAttribute("humidity", weatherService.humidityFormat(weatherInfo));
+            model.addAttribute("cloudiness", weatherService.cloudinessFormat(weatherInfo));
+            model.addAttribute("sunrise", weatherService.sunriseFormat(weatherInfo));
+            model.addAttribute("sunset", weatherService.sunsetFormat(weatherInfo));
+        }else {
+            model.addAttribute("errorMessage", "Nie ma takiego miasta! Spróbuj ponownie.");
+        }
         return "index";
     }
 }

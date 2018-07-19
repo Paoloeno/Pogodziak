@@ -29,10 +29,14 @@ public class FiveDayController {
     public String fiveDayWeather(@RequestParam("city") String city, Model model){
 
         List jsonWeatherList = fiveDayWeatherService.getListOfJsonWeathers(city);
-        List modelWeatherList = fiveDayWeatherService.convertJsonsToModels(jsonWeatherList);
-        fiveDayWeatherService.formatParameters(modelWeatherList, model);
-        model.addAttribute("city", city);
 
+        if(jsonWeatherList.size() != 0) {
+            List modelWeatherList = fiveDayWeatherService.convertJsonsToModels(jsonWeatherList);
+            fiveDayWeatherService.formatParameters(modelWeatherList, model);
+            model.addAttribute("city", city);
+        }else {
+            model.addAttribute("errorMessage","Nie ma takiego miasta! Spróbuj ponownie.");
+        }
         return "fiveDayWeather";
     }
 }
