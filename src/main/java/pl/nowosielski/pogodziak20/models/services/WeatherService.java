@@ -30,10 +30,12 @@ public class WeatherService {
     private String apiKey;
     private RestTemplate restTemplate;
     public WeatherService(){
+        /* DO UŻYCIA W PRACY
         SimpleClientHttpRequestFactory clientHttpReq = new SimpleClientHttpRequestFactory();
         Proxy proxy = new Proxy(Proxy.Type.HTTP, new InetSocketAddress("proxypzu.pzu.pl",8080));
         clientHttpReq.setProxy(proxy);
-        restTemplate = new RestTemplate(clientHttpReq);
+        */
+        restTemplate = new RestTemplate();
     }
 
     public WeatherModel makeCall(String city) {

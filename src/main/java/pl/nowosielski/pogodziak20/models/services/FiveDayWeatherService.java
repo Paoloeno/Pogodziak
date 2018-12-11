@@ -26,10 +26,12 @@ public class FiveDayWeatherService {
     private String apiKey;
     private RestTemplate restTemplate;
     public FiveDayWeatherService(){
+        /*
         SimpleClientHttpRequestFactory clientHttpReq = new SimpleClientHttpRequestFactory();
         Proxy proxy = new Proxy(Proxy.Type.HTTP, new InetSocketAddress("proxypzu.pzu.pl",8080));
         clientHttpReq.setProxy(proxy);
-        restTemplate = new RestTemplate(clientHttpReq);
+        */
+        restTemplate = new RestTemplate();
     }
 
     public List<JSONObject> getListOfJsonWeathers(String city) {
@@ -69,7 +71,17 @@ public class FiveDayWeatherService {
             JSONObject json = list.get(i);
             String hour = (String)json.get("dt_txt");
             JSONObject mainStats = (JSONObject)json.get("main");
-            double temperature = (double)mainStats.get("temp");
+            double temperature;
+
+            /**
+             * Warunek konieczny do uniknięcia sytuacji, w której JSON przekazuje liczbę w formacie long.
+             * Dzieje się tak w sporadycznych sytuacjach, gdy temperatura jest liczbą całkowitą.
+             */
+            if(mainStats.get("temp") instanceof Long){
+                temperature = ((Long)mainStats.get("temp")).doubleValue();
+            }else {
+                temperature = (double) mainStats.get("temp");
+            }
 
             FiveDayWeatherModel fiveDayWeatherModel = new FiveDayWeatherModel();
                 fiveDayWeatherModel.setWeatherHour(hour);
