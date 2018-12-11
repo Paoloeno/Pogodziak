@@ -5,6 +5,7 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.client.SimpleClientHttpRequestFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 import org.springframework.web.client.HttpClientErrorException;
@@ -12,6 +13,8 @@ import org.springframework.web.client.RestTemplate;
 import pl.nowosielski.pogodziak20.models.weather.fivedays.FiveDayWeatherMainStats;
 import pl.nowosielski.pogodziak20.models.weather.fivedays.FiveDayWeatherModel;
 
+import java.net.InetSocketAddress;
+import java.net.Proxy;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,7 +26,10 @@ public class FiveDayWeatherService {
     private String apiKey;
     private RestTemplate restTemplate;
     public FiveDayWeatherService(){
-        restTemplate = new RestTemplate();
+        SimpleClientHttpRequestFactory clientHttpReq = new SimpleClientHttpRequestFactory();
+        Proxy proxy = new Proxy(Proxy.Type.HTTP, new InetSocketAddress("proxypzu.pzu.pl",8080));
+        clientHttpReq.setProxy(proxy);
+        restTemplate = new RestTemplate(clientHttpReq);
     }
 
     public List<JSONObject> getListOfJsonWeathers(String city) {
@@ -31,10 +37,10 @@ public class FiveDayWeatherService {
         List<JSONObject> listOfweathers = new ArrayList<>();
         JSONParser parser = new JSONParser();
         String json;
+        String call = "http://api.openweathermap.org/data/2.5/forecast?q=" + city + "&appid=" + apiKey;
 
         try {
-            json = restTemplate.getForObject(
-                    "http://api.openweathermap.org/data/2.5/forecast?q=" + city + "&appid=" + apiKey, String.class);
+            json = restTemplate.getForObject(call, String.class);
         }catch(HttpClientErrorException e){
             return listOfweathers;
         }
@@ -51,7 +57,6 @@ public class FiveDayWeatherService {
         } catch (ParseException e) {
             e.printStackTrace();
         }
-
         return listOfweathers;
     }
 
@@ -69,10 +74,8 @@ public class FiveDayWeatherService {
             FiveDayWeatherModel fiveDayWeatherModel = new FiveDayWeatherModel();
                 fiveDayWeatherModel.setWeatherHour(hour);
                 fiveDayWeatherModel.setFiveDayWeatherMainStats(new FiveDayWeatherMainStats(temperature));
-
             modelList.add(fiveDayWeatherModel);
         }
-
         return modelList;
     }
 

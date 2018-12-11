@@ -1,7 +1,19 @@
 body
 {
     align-content: center;
-    background-color: #99ccff;
+    background-image: url("blueskyBackground.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    font-family: 'Amatic SC', cursive;
+}
+
+h1{
+    font-size: 36px;
+}
+
+h2{
+    font-size: 30px;
 }
 
 #fiveDayWeatherTable
@@ -25,37 +37,36 @@ td
     border-collapse: collapse;
     padding: 5px;
     text-align: center;
+    font-weight: 700;
+    font-size: 20px;
 }
 
 tr:hover
 {
-    background-color: lightsteelblue
-}
-
-tr
-{
-    background-color: white;
+    background-color: lightsteelblue;
+    cursor: pointer;
 }
 
 #mainRow
 {
     font-weight: bold;
-    background-color: darkgrey;
+    background-color: aliceblue;
+    font-size: 22px;
 }
 
 #descriptionField
 {
     font-weight: bold;
-    background-color: lightgrey;
+    /*background-color: lightgrey;*/
 }
 
 /* Link nieodwiedzony */
 a:link
 {
-    background-color: darkgrey;
     text-decoration: none; 			/* Wyłącza dekoracje tekstu (w tym przypadku podkreślenie linku) */
-    color: black;					/* kolor tekstu */
-    border: 1px black solid; 		/* Ramka tekstu szerokość/kolor/styl */
+    font-size: 24px;
+    font-weight: 600;			/* kolor tekstu */
+    border: 1px #4286f4 dotted; 		/* Ramka tekstu szerokość/kolor/styl */
     padding: 2px 4px; 				/* Odstępy ramki od tekstu */
     -webkit-border-radius: 10px; 	/* Zaokrąglenie ramki (średnica zaokrąglenia) */
     -moz-border-radius: 10px;		/* Zaokrąglenie ramki (średnica zaokrąglenia) - Mozilla */
@@ -65,7 +76,9 @@ a:link
 /* Link odwiedzony */
 a:visited
 {
-    background-color: darkgrey;
+    background-color: white;
+    font-size: 24px;
+    font-weight: 600;
     text-decoration: none;
     color: black;
     border: 1px black solid;
@@ -90,9 +103,10 @@ a:hover
 
 #sumbit
 {
-    background-color: #00264d;
-    color: white;
-    border: 1px black solid;
+    font-family: 'Amatic SC', cursive;
+    font-size: 25px;
+    font-weight: 550;
+    color: #00264d;
     padding: 2px 4px;
     -webkit-border-radius: 10px;
     -moz-border-radius: 10px;
@@ -101,10 +115,14 @@ a:hover
 
 #sumbit:hover
 {
-    background-color: white;
-    color: #00264d;
-    border: 1px black solid;
-    padding: 2px 4px;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+#typeTextField{
+    height: 30px;
+    text-align: center;
+    font-size: 25px;
     -webkit-border-radius: 10px;
     -moz-border-radius: 10px;
     border-radius: 10px;

@@ -2,24 +2,25 @@
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
-    <title>Pogodziak</title>
+    <title>Pogodziak&reg;</title>
+    <link href="https://fonts.googleapis.com/css?family=Amatic+SC" rel="stylesheet">
     <link rel="stylesheet" href="stylesheet.css" type="text/css" />
 </head>
 <body>
 <center>
-    <h2>Pogodziak</h2>
-    <h5>Sprawdź pogodę na kolejne 5 dni</h5>
+    <h1>Pogodziak &reg;</h1>
+    <h2>Wybierz dowolne miasto i sprawdź jaka będzie pogoda przez najbliższe 5 dni!</h2>
     <br><br>
 
     <div>
-        <a href="/">Aktualna pogoda</a>
-        <a href="/fiveDayWeather">Pogoda na 5 dni</a>
+        <a class="naviButton" href="/">Aktualna pogoda</a>
+        <a class="naviButton" href="/fiveDayWeather">Pogoda na 5 dni</a>
     </div>
     <br>
 
     <div style="text-align: center;">
         <form method="post" action="/fiveDayWeather">
-            <input type="text" placeholder="Wpisz miasto" name="city">
+            <input id="typeTextField" type="text" placeholder="Wpisz miasto" name="city"><br><br>
             <input id="sumbit" type="submit" value="Pokaż pogodę">
         </form>
     </div>
@@ -27,7 +28,7 @@
     <span th:if="${errorMessage} != null" th:text="${errorMessage}"></span>
 
     <div th:if="${city} != null">
-        <h3 th:text="${city}"></h3>
+        <h2 th:text="${city}"></h2>
         <table id="fiveDayWeatherTable">
             <tr id="mainRow">
                 <th>Data</th>

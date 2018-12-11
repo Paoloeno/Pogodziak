@@ -6,6 +6,7 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.client.SimpleClientHttpRequestFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
@@ -16,6 +17,8 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.net.InetSocketAddress;
+import java.net.Proxy;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -27,7 +30,10 @@ public class WeatherService {
     private String apiKey;
     private RestTemplate restTemplate;
     public WeatherService(){
-        restTemplate = new RestTemplate();
+        SimpleClientHttpRequestFactory clientHttpReq = new SimpleClientHttpRequestFactory();
+        Proxy proxy = new Proxy(Proxy.Type.HTTP, new InetSocketAddress("proxypzu.pzu.pl",8080));
+        clientHttpReq.setProxy(proxy);
+        restTemplate = new RestTemplate(clientHttpReq);
     }
 
     public WeatherModel makeCall(String city) {

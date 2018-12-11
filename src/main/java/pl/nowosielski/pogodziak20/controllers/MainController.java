@@ -39,7 +39,7 @@ public class MainController {
             model.addAttribute("cloudiness", weatherService.cloudinessFormat(weatherInfo));
             model.addAttribute("sunrise", weatherService.sunriseFormat(weatherInfo));
             model.addAttribute("sunset", weatherService.sunsetFormat(weatherInfo));
-        }else {
+        }else{
             model.addAttribute("errorMessage", "Nie ma takiego miasta! Spróbuj ponownie.");
         }
         return "index";

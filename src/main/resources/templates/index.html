@@ -3,23 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <title>Pogodziak</title>
+    <link href="https://fonts.googleapis.com/css?family=Amatic+SC" rel="stylesheet">
     <link rel="stylesheet" href="stylesheet.css" type="text/css" />
 </head>
 <body>
 <center>
-    <h2>Pogodziak</h2>
-    <h5>Sprawdź aktualną pogodę gdziekolwiek na świecie jesteś</h5>
+    <h1>Pogodziak &reg;</h1>
+    <h2>Wybierz dowolne miasto i sprawdź szczegóły dotyczące obecnej pogody!</h2>
     <br><br>
 
     <div>
-        <a href="/">Aktualna pogoda</a>
-        <a href="/fiveDayWeather">Pogoda na 5 dni</a>
+        <a class="naviButton" href="/">Aktualna pogoda</a>
+        <a class="naviButton" href="/fiveDayWeather">Pogoda na 5 dni</a>
     </div>
     <br>
 
     <div style="text-align: center;">
         <form method="post" action="/">
-            <input type="text" placeholder="Wpisz miasto" name="city">
+            <input id="typeTextField" type="text" placeholder="Wpisz miasto" name="city"><br><br>
             <input id="sumbit" type="submit" value="Pokaż pogodę">
         </form>
     </div>
@@ -29,7 +30,7 @@
     <div th:if="${city} != null">
         <table id="currentWeatherTable">
             <tr>
-                <td colspan="2" style="background-color: antiquewhite"><span th:text="${city}"></span></td>
+                <td id="mainRow" colspan="2"><span th:text="${city}"></span></td>
             </tr>
             <tr>
                 <td id="descriptionField">Kraj</td>
