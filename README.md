@@ -1,7 +1,7 @@
 # Pogodziak
 
 Prosta aplikacja pobierająca API z prognozą pogody z portalu [openweathermap.org](https://www.openweathermap.org). 
-Aplikacja jest zdeployowana na serwerach [Herokuapp](https://www.herokuapp.com) pod adresem: www.pogodziak.herokuapp.com
+Aplikacja jest zdeployowana na serwerach [Herokuapp](https://www.herokuapp.com) pod adresem: pogodziak.herokuapp.com
 
 ## Technologie
 
